@@ -72,7 +72,7 @@ function Home() {
         href="/products"
         sideText="View All Products"
       />
-      <div className="grid grid-cols-1 px-4 md:grid-cols-2 md:px-0 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-10 px-4 md:grid-cols-2 md:px-0 lg:grid-cols-4">
         {sampleProducts.map((product) => (
           <ProductCard product={product} key={product.id} />
         ))}

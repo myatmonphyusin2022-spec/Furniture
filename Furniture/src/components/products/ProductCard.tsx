@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Icons } from "../Icons";
+
+import { formatPrice } from "@/lib/utils";
 interface ProductProps {
   product: Product;
 }
@@ -28,22 +30,32 @@ function ProductCard({ product }: ProductProps) {
             />
           </AspectRatio>
         </CardHeader>
-        <CardContent className="">
-          <CardTitle className="">{product.name}</CardTitle>
-          <CardDescription>{product.price}</CardDescription>
+        <CardContent className="space-y-1.5 p-4">
+          <CardTitle className="line-clamp-1">{product.name}</CardTitle>
+          <CardDescription className="line-clamp-1">
+            {formatPrice(product.price)}
+            {product.discount > 0 && (
+              <span className="ml-2 font-extralight line-through">
+                {formatPrice(product.discount)}
+              </span>
+            )}
+          </CardDescription>
         </CardContent>
       </Link>
 
-      <CardFooter className="flex justify-between">
+      <CardFooter className="p-4 pt-1">
         {product.status === "sold" ? (
           <Button
             size="sm"
             disabled={true}
             aria-label="Sold Out"
-            className=""
+            className="h-8 w-full rounded-sm"
           ></Button>
         ) : (
-          <Button size="sm" className=""> <Icons.plus className=""/>Add To Cart</Button>
+          <Button size="sm" className="bg-own h-8 w-full rounded-sm font-bold">
+            <Icons.plus className="" />
+            Add To Cart
+          </Button>
         )}
       </CardFooter>
     </Card>
