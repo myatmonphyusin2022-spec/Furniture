@@ -74,3 +74,7 @@ export type Cart = {
   // category: string;
   // subcategory: string;
 };
+export type Category = {
+  id: string;
+  label: string;
+}
