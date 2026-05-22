@@ -20,7 +20,7 @@ export default function ProductFilter() {
     <div className="w-[220px] rounded-lg border bg-white p-4">
       {/* Furniture Made By */}
       <div className="mb-6">
-        <h2 className="mb-3 text-sm font-semibold">Furniture Made By</h2>
+        <h3 className="mb-3 text-sm font-semibold">Furniture Made By</h3>
 
         {furnitureMadeBy.map((item) => (
           <div key={item.id} className="mb-2 flex items-center gap-2">
@@ -35,7 +35,7 @@ export default function ProductFilter() {
 
       {/* Furniture Types */}
       <div className="mb-6">
-        <h2 className="mb-3 text-sm font-semibold">Furniture Types</h2>
+        <h3 className="mb-3 text-sm font-semibold">Furniture Types</h3>
 
         {furnitureTypes.map((item) => (
           <div key={item.id} className="mb-2 flex items-center gap-2">
