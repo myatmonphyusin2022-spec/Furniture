@@ -1,9 +1,9 @@
-import React from 'react'
+import { useParams } from "react-router";
 
 function ProductDetail() {
-  return (
-    <div>ProductDetail</div>
-  )
+  const { productId } = useParams();
+  const product = products.find((product) => product.id === productId);
+  return <div>ProductDetail</div>;
 }
 
-export default ProductDetail
+export default ProductDetail;
