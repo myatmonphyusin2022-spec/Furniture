@@ -12,6 +12,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import React from "react";
+import { formatPrice } from "@/lib/utils";
 
 function ProductDetail() {
   const { productId } = useParams();
@@ -40,7 +41,7 @@ function ProductDetail() {
                 <div className="relative h-96 w-full">
                   <img
                     src={image}
-                    alt={product.name}
+                    alt={product?.name}
                     className="size-full rounded-md object-cover"
                   ></img>
                 </div>
@@ -49,6 +50,17 @@ function ProductDetail() {
           </CarouselContent>
         </Carousel>
         <Separator className="mt-4 md:hidden" />
+        <div className="flex flex-col gap-4 md:w-1/2">
+          <h2 className="line-clamp-1 text-2xl font-bold">{product?.name}</h2>
+          <p className="text-muted-foreground text-base">
+            {formatPrice(Number(product?.price))}
+          </p>
+          <Separator className="my-1.5" />
+          <p className="text-muted-foreground text-base">
+            {product?.inventory} in stock
+          </p>
+          <div className=""></div>
+        </div>
       </section>
 
       <section className="space-y-6">
