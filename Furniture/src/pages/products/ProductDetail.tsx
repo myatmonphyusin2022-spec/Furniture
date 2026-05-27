@@ -6,6 +6,7 @@ import { products } from "@/data/products";
 import { Link, useParams } from "react-router";
 import Autoplay from "embla-carousel-autoplay";
 import { Separator } from "@/components/ui/separator";
+
 import {
   Carousel,
   CarouselContent,
@@ -14,6 +15,7 @@ import {
 import React from "react";
 import { formatPrice } from "@/lib/utils";
 import Rating from "@/components/products/Rating";
+import AddToFavorite from "@/components/products/AddToFavorite";
 
 function ProductDetail() {
   const { productId } = useParams();
@@ -64,6 +66,7 @@ function ProductDetail() {
           </p>
           <div className="flex items-center justify-between">
             <Rating rating={Number(product?.rating)} />
+            <AddToFavorite productId={String(product?.id)} rating={Number(product?.rating)} />
           </div>
         </div>
       </section>
