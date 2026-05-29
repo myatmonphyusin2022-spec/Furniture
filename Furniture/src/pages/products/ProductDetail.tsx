@@ -7,6 +7,13 @@ import AddToFavorite from "@/components/products/AddToFavorite";
 import { Button } from "@/components/ui/button";
 
 import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+import {
   Carousel,
   CarouselContent,
   CarouselItem,
@@ -22,7 +29,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 import Autoplay from "embla-carousel-autoplay";
 
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import { formatPrice } from "@/lib/utils";
 
@@ -86,16 +93,15 @@ function ProductDetail() {
   return (
     <div className="container mx-auto p-4">
       {/* BACK BUTTON */}
-      <Button asChild className="mb-4">
+      <Button asChild variant="outline" className="mb-6">
         <Link to="/products" className="flex items-center gap-2">
           <Icons.arrowLeft className="h-4 w-4" />
-
           <span>All Products</span>
         </Link>
       </Button>
 
       {/* PRODUCT SECTION */}
-      <section className="my-6 flex flex-col gap-8 md:flex-row md:gap-16">
+      <section className="my-6 flex flex-col gap-10 md:flex-row md:gap-16">
         {/* IMAGE CAROUSEL */}
         <Carousel
           plugins={[plugin.current]}
@@ -105,7 +111,7 @@ function ProductDetail() {
           <CarouselContent>
             {product.images.map((image) => (
               <CarouselItem key={image}>
-                <div className="relative h-96 w-full overflow-hidden rounded-md">
+                <div className="bg-muted relative h-96 w-full overflow-hidden rounded-xl border">
                   <img
                     src={image}
                     alt={product.name}
@@ -117,16 +123,14 @@ function ProductDetail() {
           </CarouselContent>
         </Carousel>
 
-        <Separator className="mt-4 md:hidden" />
-
         {/* PRODUCT INFO */}
-        <div className="flex flex-col gap-5 md:w-1/2">
+        <div className="flex flex-col gap-6 md:w-1/2">
           {/* TITLE */}
           <div className="space-y-2">
             <h2 className="text-3xl font-bold">{product.name}</h2>
 
             <p className="text-2xl font-semibold">
-              {formatPrice(Number(product.price))}
+              {formatPrice(product.price)}
             </p>
           </div>
 
@@ -189,6 +193,26 @@ function ProductDetail() {
               Add To Cart
             </Button>
           </div>
+
+          <Separator />
+
+          {/* ACCORDION */}
+          <Accordion
+            type="single"
+            collapsible
+            defaultValue="description"
+            className="w-full"
+          >
+            <AccordionItem value="description">
+              <AccordionTrigger className="text-base font-medium">
+                Description
+              </AccordionTrigger>
+
+              <AccordionContent className="text-muted-foreground leading-7">
+                {product.description ?? "No description is available."}
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
       </section>
 
