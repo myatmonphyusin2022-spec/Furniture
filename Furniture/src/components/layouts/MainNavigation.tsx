@@ -71,8 +71,8 @@ export default function MainNavigation({ items }: MainNavigationProps) {
       </NavigationMenu>
       {/* CART ICON */}
       <Link to="/cart" className="relative ml-auto">
-        <div className="flex size-10 items-center justify-center rounded-md border">
-          <Icons.cart className="size-5" />
+        <div className="flex size-8 items-center justify-center rounded-md border">
+          <Icons.cart className="size-4" />
         </div>
         {cartItems.length > 0 && (
           <span className="absolute -top-2 -right-2 flex size-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
