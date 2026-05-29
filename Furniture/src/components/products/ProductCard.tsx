@@ -1,5 +1,6 @@
 import { Link } from "react-router";
-import type { Product } from "@/types/products";
+
+import {Product} from "@/types";
 
 import { Button } from "@/components/ui/button";
 
@@ -29,6 +30,7 @@ function ProductCard({ product, className }: ProductProps) {
 
   return (
     <Card className={cn("size-full overflow-hidden rounded-lg", className)}>
+      {/* PRODUCT LINK */}
       <Link to={`/products/${product.id}`} aria-label={product.name}>
         <CardHeader className="border-b p-0">
           <AspectRatio ratio={1 / 1} className="bg-muted">
@@ -56,6 +58,7 @@ function ProductCard({ product, className }: ProductProps) {
         </CardContent>
       </Link>
 
+      {/* FOOTER */}
       <CardFooter className="p-4 pt-1">
         {product.status === "sold" ? (
           <Button
@@ -70,14 +73,16 @@ function ProductCard({ product, className }: ProductProps) {
           <Button
             size="sm"
             className="bg-own h-8 w-full rounded-sm font-bold"
-            onClick={() =>
+            onClick={(e) => {
+              e.stopPropagation();
+
               addToCart({
                 id: String(product.id),
                 title: product.name,
                 price: product.price,
                 image: product.images[0],
-              })
-            }
+              });
+            }}
           >
             <Icons.plus className="mr-1 size-4" />
             Add To Cart

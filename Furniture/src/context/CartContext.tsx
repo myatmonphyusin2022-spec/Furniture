@@ -1,6 +1,11 @@
 // src/context/CartContext.tsx
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  type ReactNode,
+} from "react";
 
 export interface CartItem {
   id: string;
@@ -12,33 +17,55 @@ export interface CartItem {
 
 interface CartContextType {
   cartItems: CartItem[];
-  addToCart: (product: Omit<CartItem, "quantity">) => void;
+
+  addToCart: (
+    product: Omit<CartItem, "quantity">,
+  ) => void;
+
+  removeFromCart: (
+    id: string,
+  ) => void;
 }
 
-const CartContext = createContext<CartContextType | null>(null);
+const CartContext =
+  createContext<CartContextType | null>(
+    null,
+  );
 
 interface CartProviderProps {
   children: ReactNode;
 }
 
-export function CartProvider({ children }: CartProviderProps) {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+export function CartProvider({
+  children,
+}: CartProviderProps) {
+  const [cartItems, setCartItems] =
+    useState<CartItem[]>([]);
 
-  const addToCart = (product: Omit<CartItem, "quantity">) => {
+  // ADD TO CART
+  const addToCart = (
+    product: Omit<CartItem, "quantity">,
+  ) => {
     setCartItems((prev) => {
-      const existingItem = prev.find((item) => item.id === product.id);
+      const existingItem = prev.find(
+        (item) =>
+          item.id === product.id,
+      );
 
+      // IF PRODUCT EXISTS
       if (existingItem) {
         return prev.map((item) =>
           item.id === product.id
             ? {
                 ...item,
-                quantity: item.quantity + 1,
+                quantity:
+                  item.quantity + 1,
               }
             : item,
         );
       }
 
+      // NEW PRODUCT
       return [
         ...prev,
         {
@@ -49,11 +76,23 @@ export function CartProvider({ children }: CartProviderProps) {
     });
   };
 
+  // REMOVE ITEM
+  const removeFromCart = (
+    id: string,
+  ) => {
+    setCartItems((prev) =>
+      prev.filter(
+        (item) => item.id !== id,
+      ),
+    );
+  };
+
   return (
     <CartContext.Provider
       value={{
         cartItems,
         addToCart,
+        removeFromCart,
       }}
     >
       {children}
@@ -61,11 +100,16 @@ export function CartProvider({ children }: CartProviderProps) {
   );
 }
 
+// CUSTOM HOOK
+// eslint-disable-next-line react-refresh/only-export-components
 export function useCart() {
-  const context = useContext(CartContext);
+  const context =
+    useContext(CartContext);
 
   if (!context) {
-    throw new Error("useCart must be used inside CartProvider");
+    throw new Error(
+      "useCart must be used inside CartProvider",
+    );
   }
 
   return context;
