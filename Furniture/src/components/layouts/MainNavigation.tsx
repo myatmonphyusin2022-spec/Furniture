@@ -24,7 +24,7 @@ export default function MainNavigation({ items }: MainNavigationProps) {
   const { cartItems } = useCart();
 
   return (
-    <div className="hidden items-center gap-6 lg:flex">
+    <div className="hidden w-full items-center gap-6 lg:flex">
       {/* LOGO */}
       <Link to="/" className="flex items-center space-x-2">
         <Icons.logo className="size-7" aria-hidden="true" />
@@ -33,9 +33,8 @@ export default function MainNavigation({ items }: MainNavigationProps) {
 
         <span className="sr-only">Home</span>
       </Link>
-
       {/* NAVIGATION */}
-      <NavigationMenu>
+      <NavigationMenu className="flex-1">
         <NavigationMenuList>
           {items?.[0]?.card && (
             <NavigationMenuItem>
@@ -70,13 +69,11 @@ export default function MainNavigation({ items }: MainNavigationProps) {
             ))}
         </NavigationMenuList>
       </NavigationMenu>
-
       {/* CART ICON */}
-      <Link to="/cart" className="relative">
+      <Link to="/cart" className="relative ml-auto">
         <div className="flex size-10 items-center justify-center rounded-md border">
-          <Icons.shoppingCart className="size-5" />
+          <Icons.cart className="size-5" />
         </div>
-
         {cartItems.length > 0 && (
           <span className="absolute -top-2 -right-2 flex size-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
             {cartItems.length}

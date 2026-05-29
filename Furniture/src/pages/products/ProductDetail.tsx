@@ -22,7 +22,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 import Autoplay from "embla-carousel-autoplay";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import { formatPrice } from "@/lib/utils";
 
@@ -37,9 +37,9 @@ function ProductDetail() {
 
   const { productId } = useParams();
 
-  const product = products.find((product) => product.id === productId);
+  const product = products.find((product) => String(product.id) === productId);
 
-  const plugin = React.useRef(
+  const plugin = useRef(
     Autoplay({
       delay: 3000,
       stopOnInteraction: true,
@@ -59,10 +59,11 @@ function ProductDetail() {
   const handleBuyNow = () => {
     for (let i = 0; i < quantity; i++) {
       addToCart({
-        id: String(product.id),
+        id: product.id,
         title: product.name,
         price: product.price,
         image: product.images[0],
+        quantity: 1,
       });
     }
 
@@ -73,10 +74,11 @@ function ProductDetail() {
   const handleAddToCart = () => {
     for (let i = 0; i < quantity; i++) {
       addToCart({
-        id: String(product.id),
+        id: product.id,
         title: product.name,
         price: product.price,
         image: product.images[0],
+        quantity: 1,
       });
     }
   };
@@ -96,7 +98,6 @@ function ProductDetail() {
       <section className="my-6 flex flex-col gap-8 md:flex-row md:gap-16">
         {/* IMAGE CAROUSEL */}
         <Carousel
-          // eslint-disable-next-line react-hooks/refs
           plugins={[plugin.current]}
           opts={{ loop: true }}
           className="w-full md:w-1/2"
@@ -173,10 +174,12 @@ function ProductDetail() {
 
           {/* ACTION BUTTONS */}
           <div className="flex flex-col gap-3 sm:flex-row">
+            {/* BUY NOW */}
             <Button className="flex-1" onClick={handleBuyNow}>
               Buy Now
             </Button>
 
+            {/* ADD TO CART */}
             <Button
               variant="outline"
               className="flex-1"

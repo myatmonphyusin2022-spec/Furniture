@@ -34,28 +34,24 @@ export const router = createBrowserRouter([
     errorElement: <Error />,
 
     children: [
-      // HOME
       {
         index: true,
 
         Component: HomePage,
       },
 
-      // ABOUT
       {
         path: "about",
 
         Component: AboutPage,
       },
 
-      // CART
       {
         path: "cart",
 
         Component: CartPage,
       },
 
-      // BLOGS
       {
         path: "blogs",
 
@@ -88,7 +84,6 @@ export const router = createBrowserRouter([
         ],
       },
 
-      // PRODUCTS
       {
         path: "products",
 

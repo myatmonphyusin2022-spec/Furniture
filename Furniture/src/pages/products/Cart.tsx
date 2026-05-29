@@ -7,8 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/Icons";
 
 function CartPage() {
-  const { cartItems, removeFromCart } = useCart();
-
+  const { cartItems, removeFromCart, clearCart } = useCart();
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0,
@@ -21,7 +20,7 @@ function CartPage() {
       <div className="space-y-4">
         {cartItems.length === 0 ? (
           <div className="flex flex-col items-center justify-center gap-4 py-20">
-            <Icons.shoppingCart className="text-muted-foreground size-14" />
+            <Icons.cart className="text-muted-foreground size-14" />
 
             <p className="text-muted-foreground">Your cart is empty.</p>
           </div>
@@ -73,7 +72,15 @@ function CartPage() {
 
             {/* CHECKOUT BUTTON */}
             <div className="flex justify-end">
-              <Button className="mt-4 px-8">Checkout</Button>
+              <Button
+                className="mt-4 px-8"
+                onClick={() => {
+                  alert("Checkout successful!");
+                  clearCart();
+                }}
+              >
+                Checkout
+              </Button>
             </div>
           </>
         )}
