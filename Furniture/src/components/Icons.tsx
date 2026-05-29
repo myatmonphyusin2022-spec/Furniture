@@ -8,6 +8,7 @@ import {
   PlusIcon,
   StarIcon,
   HeartIcon,
+  ShoppingCartIcon,
 } from "@radix-ui/react-icons";
 
 import type { IconProps } from "@radix-ui/react-icons/dist/types";
@@ -41,4 +42,5 @@ export const Icons = {
   plus: PlusIcon,
   star: StarIcon,
   heart: HeartIcon,
+  shoppingCart: ShoppingCartIcon,
 };

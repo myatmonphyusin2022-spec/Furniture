@@ -1,15 +1,19 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import "./index.css";
+import React from "react";
+import ReactDOM from "react-dom/client";
 
 import { RouterProvider } from "react-router";
-import { router } from "./routes";
-import { ThemeProvider } from "./components/theme-provider";
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+import "./index.css";
+
+import {
+  router} from "./routes";
+
+import { CartProvider } from "@/context/CartContext";
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <CartProvider>
       <RouterProvider router={router} />
-    </ThemeProvider>
-  </StrictMode>,
+    </CartProvider>
+  </React.StrictMode>,
 );

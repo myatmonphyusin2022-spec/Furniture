@@ -6,14 +6,20 @@ import AboutPage from "./pages/About";
 import RootLayout from "./pages/RootLayout";
 import Error from "./pages/Error";
 
-const BlogPage = lazy(() => import("@/pages/blogs/Blog"));
-const BlogDetailPage = lazy(() => import("@/pages/blogs/BlogDetail"));
-const BlogRootLayout = lazy(() => import("@/pages/BlogRootLayout"));
+import CartPage from "@/pages/products/Cart";
 
 import ProductPage from "./pages/products/Product";
 import ProductDetailPage from "./pages/products/ProductDetail";
 import ProductRootLayout from "./pages/products/ProductRootLayout";
 
+// Lazy Imports
+const BlogPage = lazy(() => import("@/pages/blogs/Blog"));
+
+const BlogDetailPage = lazy(() => import("@/pages/blogs/BlogDetail"));
+
+const BlogRootLayout = lazy(() => import("@/pages/BlogRootLayout"));
+
+// Loading UI
 const SuspenseFallback = () => <div className="text-center">Loading....</div>;
 
 export const router = createBrowserRouter([
@@ -21,28 +27,48 @@ export const router = createBrowserRouter([
     path: "/",
     Component: RootLayout,
     errorElement: <Error />,
+
     children: [
-      { index: true, Component: HomePage },
-      { path: "about", Component: AboutPage },
+      {
+        index: true,
+        Component: HomePage,
+      },
 
       {
+        path: "about",
+        Component: AboutPage,
+      },
+
+      // CART PAGE
+      {
+        path: "cart",
+        Component: CartPage,
+      },
+
+      // BLOGS
+      {
         path: "blogs",
+
         element: (
           <Suspense fallback={<SuspenseFallback />}>
             <BlogRootLayout />
           </Suspense>
         ),
+
         children: [
           {
             index: true,
+
             element: (
               <Suspense fallback={<SuspenseFallback />}>
                 <BlogPage />
               </Suspense>
             ),
           },
+
           {
             path: ":postId",
+
             element: (
               <Suspense fallback={<SuspenseFallback />}>
                 <BlogDetailPage />
@@ -52,12 +78,21 @@ export const router = createBrowserRouter([
         ],
       },
 
+      // PRODUCTS
       {
         path: "products",
         Component: ProductRootLayout,
+
         children: [
-          { index: true, Component: ProductPage },
-          { path: ":productId", Component: ProductDetailPage },
+          {
+            index: true,
+            Component: ProductPage,
+          },
+
+          {
+            path: ":productId",
+            Component: ProductDetailPage,
+          },
         ],
       },
     ],
