@@ -2,8 +2,9 @@ import MainNavigation from "@/components/layouts/MainNavigation";
 import { siteConfig } from "@/config/site";
 import MobileNavigation from "@/components/layouts/MobileNavigation";
 import { ModeToggle } from "../mode-toggle";
-import {AuthDropdown} from "@/components/layouts/AuthDropdown";
-import {User} from "@/data/user";
+
+import { User } from "@/data/user";
+import AuthDropdown from "./AuthDropdown";
 function Header() {
   return (
     <header className="bg-background fixed top-0 z-50 w-full border-b">
