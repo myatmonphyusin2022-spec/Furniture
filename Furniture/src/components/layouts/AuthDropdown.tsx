@@ -10,9 +10,11 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
+  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Icons } from "../Icons";
 interface UserProps {
   user: User;
 }
@@ -52,16 +54,33 @@ function AuthDropdown({ user }: UserProps) {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <Link to="/profile">Profile</Link>
+          <DropdownMenuItem asChild>
+            <Link to="#">
+              <Icons.dashboard className="mr-2 size-4" aria-hidden="true" />
+              Dashboard
+               <DropdownMenuShortcut>⇧⌘D</DropdownMenuShortcut>
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Link to="/settings">Settings</Link>
+            <Link to="#">
+              <Icons.dashboard className="mr-2 size-4" aria-hidden="true" />
+              Settings
+               <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+            </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <Link to="/signout">Sign out</Link>
+            <DropdownMenuItem asChild>
+          <Link to="/login">
+            <Icons.exit className="mr-2 size-4" aria-hidden="true" />
+            Log out
+            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+          </Link>
+          {/* <Form method="POST" action="/logout">
+            <button type="submit" className="w-full">
+              Logout
+            </button>
+          </Form> */}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

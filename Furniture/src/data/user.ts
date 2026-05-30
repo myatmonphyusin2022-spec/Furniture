@@ -1,7 +1,7 @@
 export const User = {
   id: "uuid1",
-  firstName: "MyatMon",
-  lastName: "PhyuSin",
+  firstName: "Skee",
+  lastName: "",
   username: "skeena",
   email: "myatmonphyusin2022@gmail.com",
   imageUrl:
