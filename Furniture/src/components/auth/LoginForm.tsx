@@ -38,21 +38,24 @@ export default function LoginForm() {
   return (
     <Card className="w-full max-w-sm border-none shadow-none">
       <CardHeader className="px-0">
-        <CardTitle className="text-2xl">Sign In</CardTitle>
+        <CardTitle className="pl-2 text-3xl font-semibold tracking-tight">
+          Sign In
+        </CardTitle>
 
-        <CardDescription>
+        <CardDescription className="text-muted-foreground pl-2 text-sm">
           Enter your phone number below to login to your account
         </CardDescription>
       </CardHeader>
 
       <CardContent className="px-0">
-        <form onSubmit={handleLogin} className="space-y-4">
+        <form onSubmit={handleLogin} className="space-y-5">
           {/* Phone Number */}
-          <div className="space-y-2">
+          <div className="space-y-2 pl-2">
             <label className="text-sm font-medium">Phone Number</label>
 
             <Input
-              type="tel"
+              className="h-11"
+              type="text"
               placeholder="0977********"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
@@ -60,19 +63,20 @@ export default function LoginForm() {
           </div>
 
           {/* Password */}
-          <div className="space-y-2">
+          <div className="space-y-2 pl-2">
             <div className="flex items-center">
               <label className="text-sm font-medium">Password</label>
 
               <Link
                 to="/reset"
-                className="ml-auto text-sm underline-offset-4 hover:underline"
+                className="text-muted-foreground ml-auto pr-2 text-xs hover:underline"
               >
                 Forgot your password?
               </Link>
             </div>
 
             <PasswordInput
+              className="h-10 text-sm"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -86,7 +90,7 @@ export default function LoginForm() {
           {/* Submit Button */}
           <Button
             type="submit"
-            className="w-full"
+            className="h-10 w-full text-sm font-medium"
             disabled={navigation.state === "submitting"}
           >
             {navigation.state === "submitting" ? "Submitting..." : "Sign In"}
@@ -98,7 +102,7 @@ export default function LoginForm() {
               <span className="w-full border-t" />
             </div>
 
-            <div className="relative flex justify-center text-xs uppercase">
+            <div className="relative flex justify-center text-[11px] tracking-wider uppercase">
               <span className="bg-background text-muted-foreground px-2">
                 Or continue with
               </span>
@@ -106,17 +110,21 @@ export default function LoginForm() {
           </div>
 
           {/* Google Button */}
-          <Button type="button" variant="outline" className="w-full">
-            Sign In with Google
+          <Button
+            type="button"
+            variant="outline"
+            className="h-10 w-full text-sm font-medium"
+          >
+            Continue with Google
           </Button>
         </form>
 
         {/* Register Link */}
-        <div className="mt-6 text-center text-sm">
+        <div className="mt-4 text-center text-sm">
           Don't have an account?{" "}
           <Link
             to="/register"
-            className="font-medium underline underline-offset-4"
+            className="text-foreground font-semibold underline underline-offset-4"
           >
             Sign Up
           </Link>
