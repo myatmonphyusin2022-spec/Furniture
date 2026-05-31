@@ -12,6 +12,7 @@ function Header() {
         <MainNavigation items={siteConfig.mainNav} />
         <MobileNavigation items={siteConfig.mainNav} />
         <div className="mx-auto flex h-16 flex-1 items-center justify-end lg:mr-0">
+          {/* <CartSheet/> */}
           <ModeToggle />
           <AuthDropdown user={User} />
         </div>
