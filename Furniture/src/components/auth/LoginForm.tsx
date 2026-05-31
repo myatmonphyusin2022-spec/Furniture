@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useSubmit, useNavigation, useActionData } from "react-router";
+import { Link, useNavigate, useNavigation, useActionData } from "react-router";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { PasswordInput } from "./Password-Input";
 
 export default function LoginForm() {
-  const submit = useSubmit();
+  const navigate = useNavigate();
   const navigation = useNavigation();
   const actionData = useActionData();
 
@@ -23,18 +23,8 @@ export default function LoginForm() {
   function handleLogin(e) {
     e.preventDefault();
 
-    submit(
-      {
-        phone,
-        password,
-      },
-      {
-        method: "post",
-        action: "/login",
-      },
-    );
+    navigate("/");
   }
-
   return (
     <Card className="w-full max-w-sm border-none shadow-none">
       <CardHeader className="px-0">
@@ -90,7 +80,7 @@ export default function LoginForm() {
           {/* Submit Button */}
           <Button
             type="submit"
-            className="h-10 w-full text-sm font-medium"
+            className="h-10 w-full pl-2 text-sm font-medium"
             disabled={navigation.state === "submitting"}
           >
             {navigation.state === "submitting" ? "Submitting..." : "Sign In"}
