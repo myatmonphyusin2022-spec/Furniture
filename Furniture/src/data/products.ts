@@ -1,5 +1,3 @@
-
-
 import p1 from "@/data/images/p-1.webp";
 import p2 from "@/data/images/p-2.webp";
 import p3 from "@/data/images/p-3.webp";
@@ -32,6 +30,7 @@ export const products = [
       "Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quam ut purus rutrum lobortis",
     images: [p1, p4, p7],
     categoryId: "uuid1",
+    type: "uuid1",
     price: 230,
     discount: 0,
     rating: 4,
@@ -45,6 +44,7 @@ export const products = [
       "Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quam ut purus rutrum lobortis",
     images: [p2, p5, p8],
     categoryId: "uuid2",
+    type: "uuid1",
     price: 180.85,
     discount: 200,
     rating: 3.5,
@@ -58,6 +58,7 @@ export const products = [
       "Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quam ut purus rutrum lobortis",
     images: [p3, p1, p6],
     categoryId: "uuid1",
+    type: "uuid1",
     price: 90,
     discount: 110,
     rating: 4,
@@ -71,6 +72,7 @@ export const products = [
       "Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quam ut purus rutrum lobortis",
     images: [p4, p2, p7],
     categoryId: "uuid3",
+    type: "uuid2",
     price: 1500,
     discount: 0,
     rating: 4,
@@ -84,6 +86,7 @@ export const products = [
       "Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quam ut purus rutrum lobortis",
     images: [p5, p3, p8],
     categoryId: "uuid1",
+    type: "uuid3",
     price: 230,
     discount: 0,
     rating: 4,
@@ -97,6 +100,7 @@ export const products = [
       "Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quam ut purus rutrum lobortis",
     images: [p6, p2, p4],
     categoryId: "uuid1",
+    type: "uuid4",
     price: 140,
     discount: 150,
     rating: 3,
@@ -110,6 +114,7 @@ export const products = [
       "Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quam ut purus rutrum lobortis",
     images: [p7, p1, p3],
     categoryId: "uuid3",
+    type: "uuid5",
     price: 210,
     discount: 0,
     rating: 4,
@@ -123,6 +128,7 @@ export const products = [
       "Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quam ut purus rutrum lobortis",
     images: [p8, p4, p2],
     categoryId: "uuid2",
+    type: "uuid2",
     price: 140,
     discount: 150,
     rating: 3,
@@ -136,6 +142,7 @@ export const products = [
       "Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quam ut purus rutrum lobortis",
     images: [p5, p3, p8],
     categoryId: "uuid1",
+    type: "uuid1",
     price: 250,
     discount: 260,
     rating: 4,

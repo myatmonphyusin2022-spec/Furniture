@@ -9,10 +9,21 @@ function Product() {
   const [searchParams] = useSearchParams();
 
   const categoryId = searchParams.get("categories");
+  const typeId = searchParams.get("type");
 
-  const filteredProducts = categoryId
-    ? products.filter((product) => product.categoryId === categoryId)
-    : products;
+  let filteredProducts = products;
+
+  if (categoryId) {
+    filteredProducts = filteredProducts.filter(
+      (product) => product.categoryId === categoryId,
+    );
+  }
+
+  if (typeId) {
+    filteredProducts = filteredProducts.filter(
+      (product) => product.type === typeId,
+    );
+  }
 
   return (
     <div className="container mx-auto">

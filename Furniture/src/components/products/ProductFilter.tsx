@@ -17,16 +17,24 @@ interface ProductFilterProps {
 
 export default function ProductFilter({ filterList }: ProductFilterProps) {
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedType, setSelectedType] = useState("");
 
   const navigate = useNavigate();
 
   const handleFilter = () => {
-    if (!selectedCategory) {
-      navigate("/products");
-      return;
+    const params = new URLSearchParams();
+
+    if (selectedCategory) {
+      params.set("categories", selectedCategory);
     }
 
-    navigate(`/products?categories=${selectedCategory}`);
+    if (selectedType) {
+      params.set("type", selectedType);
+    }
+
+    const queryString = params.toString();
+
+    navigate(queryString ? `/products?${queryString}` : "/products");
   };
 
   return (
@@ -56,7 +64,11 @@ export default function ProductFilter({ filterList }: ProductFilterProps) {
 
         {filterList.types.map((item) => (
           <div key={item.id} className="mb-2 flex items-center gap-2">
-            <Checkbox id={item.id} />
+            <Checkbox
+              id={item.id}
+              checked={selectedType === item.id}
+              onCheckedChange={() => setSelectedType(item.id)}
+            />
 
             <label htmlFor={item.id} className="text-xs">
               {item.label}
