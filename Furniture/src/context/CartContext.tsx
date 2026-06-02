@@ -12,6 +12,7 @@ type CartContextType = {
   cartItems: Product[];
   addToCart: (product: Product) => void;
   removeFromCart: (id: string) => void;
+  updateQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;
 };
 
@@ -53,6 +54,17 @@ export const CartProvider = ({ children }: Props) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
+  const updateQuantity = (id: string, quantity: number) => {
+    if (quantity < 1) {
+      removeFromCart(id);
+      return;
+    }
+
+    setCartItems((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, quantity } : item)),
+    );
+  };
+
   const clearCart = () => {
     setCartItems([]);
   };
@@ -63,6 +75,7 @@ export const CartProvider = ({ children }: Props) => {
         cartItems,
         addToCart,
         removeFromCart,
+        updateQuantity,
         clearCart,
       }}
     >

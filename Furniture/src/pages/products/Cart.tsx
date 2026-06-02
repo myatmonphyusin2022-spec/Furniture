@@ -5,9 +5,10 @@ import { formatPrice } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 import { Icons } from "@/components/Icons";
+import Editable from "@/components/cart/Editable";
 
 function CartPage() {
-  const { cartItems, removeFromCart, clearCart } = useCart();
+  const { cartItems, removeFromCart, updateQuantity, clearCart } = useCart();
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0,
@@ -44,7 +45,10 @@ function CartPage() {
                     {formatPrice(item.price)}
                   </p>
 
-                  <p className="text-sm">Quantity: {item.quantity}</p>
+                  <Editable
+                    quantity={item.quantity}
+                    onUpdate={(quantity) => updateQuantity(item.id, quantity)}
+                  />
                 </div>
 
                 <div className="flex flex-col items-end gap-2">
