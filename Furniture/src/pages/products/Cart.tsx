@@ -1,18 +1,13 @@
 import { useCart } from "@/context/CartContext";
-
 import { formatPrice } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
-
 import { Icons } from "@/components/Icons";
 import Editable from "@/components/cart/Editable";
+import CartSummary from "@/components/cart/CartSummary";
 
 function CartPage() {
   const { cartItems, removeFromCart, updateQuantity, clearCart } = useCart();
-  const totalPrice = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0,
-  );
 
   return (
     <div className="container py-10">
@@ -22,7 +17,6 @@ function CartPage() {
         {cartItems.length === 0 ? (
           <div className="flex flex-col items-center justify-center gap-4 py-20">
             <Icons.cart className="text-muted-foreground size-14" />
-
             <p className="text-muted-foreground">Your cart is empty.</p>
           </div>
         ) : (
@@ -67,14 +61,8 @@ function CartPage() {
               </div>
             ))}
 
-            {/* TOTAL */}
-            <div className="mt-6 flex items-center justify-between border-t pt-6">
-              <h2 className="text-2xl font-bold">Total</h2>
+            <CartSummary />
 
-              <p className="text-2xl font-bold">{formatPrice(totalPrice)}</p>
-            </div>
-
-            {/* CHECKOUT BUTTON */}
             <div className="flex justify-end">
               <Button
                 className="mt-4 px-8"
