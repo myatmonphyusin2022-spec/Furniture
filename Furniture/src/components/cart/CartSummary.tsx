@@ -14,27 +14,27 @@ function CartSummary() {
   const total = subtotal + shipping + tax;
 
   return (
-    <div className="space-y-2 border-t pt-4">
-      <div className="flex justify-between">
-        <span>Subtotal</span>
+    <div className="space-y-4 rounded-lg border p-4 md:p-6">
+      <div className="flex items-center justify-between text-sm md:text-base">
+        <span className="text-muted-foreground">Subtotal</span>
         <span>{formatPrice(subtotal)}</span>
       </div>
 
-      <div className="flex justify-between">
-        <span>Shipping</span>
-        <span>
-          {shipping === 0 ? "Free" : formatPrice(shipping)}
-        </span>
+      <div className="flex items-center justify-between text-sm md:text-base">
+        <span className="text-muted-foreground">Shipping</span>
+        <span>{shipping === 0 ? "Free" : formatPrice(shipping)}</span>
       </div>
 
-      <div className="flex justify-between">
-        <span>Tax</span>
+      <div className="flex items-center justify-between text-sm md:text-base">
+        <span className="text-muted-foreground">Tax</span>
         <span>{formatPrice(tax)}</span>
       </div>
 
-      <div className="flex justify-between text-lg font-bold">
-        <span>Total</span>
-        <span>{formatPrice(total)}</span>
+      <div className="border-t pt-4">
+        <div className="flex items-center justify-between text-lg font-bold md:text-xl">
+          <span>Total</span>
+          <span>{formatPrice(total)}</span>
+        </div>
       </div>
     </div>
   );
