@@ -30,7 +30,7 @@ function CartPage() {
             <CartSummary />
 
             <Button
-              className="mt-4 h-16 w-full text-lg"
+              className="mt-4 w-full"
               onClick={() => {
                 alert("Checkout successful!");
                 clearCart();

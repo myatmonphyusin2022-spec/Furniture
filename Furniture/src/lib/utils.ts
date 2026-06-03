@@ -11,6 +11,6 @@ export function formatPrice(
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: opts.currency ?? "USD",
-    notation: opts.notation ?? "compact",
+    notation: opts.notation ?? "standard",
   }).format(Number(price));
 }
