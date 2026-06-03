@@ -14,7 +14,7 @@ function CartSummary() {
   const total = subtotal + shipping + tax;
 
   return (
-    <div className="space-y-4 rounded-lg border p-4 md:p-6">
+    <div className="space-y-3 border-t pt-4">
       <div className="flex items-center justify-between text-sm md:text-base">
         <span className="text-muted-foreground">Subtotal</span>
         <span>{formatPrice(subtotal)}</span>

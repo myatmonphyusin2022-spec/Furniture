@@ -10,29 +10,27 @@ function CartPage() {
   const { cartItems, clearCart } = useCart();
 
   return (
-    <div className="container py-6">
-      <h1 className="mb-6 text-2xl font-bold md:text-3xl">Shopping Cart</h1>
+    <div className="container mx-auto px-4 py-6">
+      <h1 className="mb-6 text-2xl font-extrabold">Shopping Cart</h1>
 
       {cartItems.length === 0 ? (
-        <div className="flex min-h-[60vh] flex-col items-center justify-center">
+        <div className="mb-4 flex min-h-[60vh] flex-col items-center justify-center">
           <Icons.cart className="text-muted-foreground size-14" />
           <p className="text-muted-foreground mt-4">Your cart is empty.</p>
         </div>
       ) : (
-        <div className="flex min-h-[70vh] flex-col">
-          {/* Cart Items */}
-          <div className="space-y-4">
+        <div className="flex h-[80vh] flex-col">
+          <div className="flex-1 space-y-4 overflow-y-auto">
             {cartItems.map((item) => (
               <CartItem key={item.id} item={item} />
             ))}
           </div>
 
-          {/* Summary + Checkout */}
-          <div className="mt-auto space-y-4 pt-8">
+          <div className="border-t pt-4">
             <CartSummary />
 
             <Button
-              className="w-full "
+              className="mt-4 h-16 w-full text-lg"
               onClick={() => {
                 alert("Checkout successful!");
                 clearCart();

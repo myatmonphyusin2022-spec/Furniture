@@ -17,15 +17,15 @@ function CartItem({ item }: CartItemProps) {
   const { removeFromCart, updateQuantity } = useCart();
 
   return (
-    <div className="flex items-center gap-4 rounded-lg border p-4">
+    <div className="flex items-center gap-3 rounded-lg border p-3">
       <img
         src={item.image}
         alt={item.title}
-        className="h-20 w-20 rounded-md object-cover md:h-24 md:w-24"
+        className="h-16 w-16 rounded-md object-cover md:h-20 md:w-20"
       />
 
-      <div className="min-w-0 flex-1">
-        <h2 className="truncate font-semibold">{item.title}</h2>
+      <div className="flex-1">
+        <h2 className="text-sm font-semibold md:text-base">{item.title}</h2>
 
         <p className="text-muted-foreground text-sm">
           {formatPrice(item.price)}
@@ -38,7 +38,7 @@ function CartItem({ item }: CartItemProps) {
       </div>
 
       <div className="flex flex-col items-end gap-2">
-        <p className="text-sm font-semibold md:text-base">
+        <p className="font-semibold">
           {formatPrice(item.price * item.quantity)}
         </p>
 
