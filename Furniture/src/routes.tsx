@@ -17,6 +17,7 @@ import ProductRootLayout from "./pages/products/ProductRootLayout";
 import LoginPage from "./pages/auth/Login";
 import RegisterPage from "./pages/auth/Register";
 
+
 // LAZY IMPORTS
 const BlogPage = lazy(() => import("@/pages/blogs/Blog"));
 
@@ -34,6 +35,7 @@ export const router = createBrowserRouter([
     Component: RootLayout,
 
     errorElement: <Error />,
+    
 
     children: [
       {

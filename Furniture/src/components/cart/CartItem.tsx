@@ -17,27 +17,31 @@ function CartItem({ item }: CartItemProps) {
   const { removeFromCart, updateQuantity } = useCart();
 
   return (
-    <div className="flex items-center gap-3 rounded-lg border p-3">
+    <div className="flex flex-col gap-4 rounded-lg border p-4 md:flex-row md:items-center">
+      {/* Image */}
       <img
         src={item.image}
         alt={item.title}
-        className="h-16 w-16 rounded-md object-cover md:h-20 md:w-20"
+        className="h-20 w-20 rounded-md object-cover md:h-24 md:w-24"
       />
 
+      {/* Product Info */}
       <div className="flex-1">
-        <h2 className="text-sm font-semibold md:text-base">{item.title}</h2>
+        <h2 className="font-semibold">{item.title}</h2>
 
-        <p className="text-muted-foreground text-sm">
-          {formatPrice(item.price)}
-        </p>
+        <p className="text-muted-foreground">{formatPrice(item.price)}</p>
+      </div>
 
+      {/* Quantity */}
+      <div className="md:w-40">
         <Editable
           quantity={item.quantity}
           onUpdate={(quantity) => updateQuantity(item.id, quantity)}
         />
       </div>
 
-      <div className="flex flex-col items-end gap-2">
+      {/* Price + Remove */}
+      <div className="flex flex-col items-end gap-2 md:w-32">
         <p className="font-semibold">
           {formatPrice(item.price * item.quantity)}
         </p>
