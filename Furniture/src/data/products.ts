@@ -19,7 +19,7 @@ export const filterList = {
     { id: "uuid1", label: "Wooden" },
     { id: "uuid2", label: "Bamboo" },
     { id: "uuid3", label: "Metal" },
-  ],
+  ]
 };
 
 export const products = [

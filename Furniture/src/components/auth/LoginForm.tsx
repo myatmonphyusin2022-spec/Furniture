@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Link, useNavigate, useNavigation, useActionData } from "react-router";
+import { Link, useSubmit, useNavigation, useActionData } from "react-router";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -11,111 +10,119 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "./Password-Input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+const FormSchema = z.object({
+  phone: z
+    .string()
+    .min(7, "Phone number is too short")
+    .max(12, "Phone number is too long")
+    .regex(/^\d+$/, "Phone number must be numbers"),
+  password: z
+    .string()
+    .min(8, "Password must be 8 digits.")
+    .max(8, "Password must be 8 digits.")
+    .regex(/^\d+$/, "Password must be numbers"),
+});
 
 export default function LoginForm() {
-  const navigate = useNavigate();
+  const submit = useSubmit();
   const navigation = useNavigation();
-  const actionData = useActionData();
+  const actionData = useActionData() as { error?: string } | undefined;
 
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      phone: "",
+      password: "",
+    },
+  });
 
-  function handleLogin(e) {
-    e.preventDefault();
-
-    navigate("/");
+  function onSubmit(values: z.infer<typeof FormSchema>) {
+    submit(values, { method: "post", action: "/login" });
   }
-  return (
-    <Card className="w-full max-w-sm border-none shadow-none">
-      <CardHeader className="px-0">
-        <CardTitle className="pl-2 text-3xl font-semibold tracking-tight">
-          Sign In
-        </CardTitle>
 
-        <CardDescription className="text-muted-foreground pl-2 text-sm">
+  return (
+    <Card className="mx-auto max-w-sm">
+      <CardHeader>
+        <CardTitle className="text-2xl">Sign In</CardTitle>
+        <CardDescription>
           Enter your phone number below to login to your account
         </CardDescription>
       </CardHeader>
-
-      <CardContent className="px-0">
-        <form onSubmit={handleLogin} className="space-y-5">
-          {/* Phone Number */}
-          <div className="space-y-2 pl-2">
-            <label className="text-sm font-medium">Phone Number</label>
-
+      <CardContent>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-4"
+          autoComplete="off"
+        >
+          {/* Phone Number Field */}
+          <div className="space-y-2">
+            <label className="text-sm leading-none font-medium">
+              Phone Number
+            </label>
             <Input
-              className="h-11"
-              type="text"
-              placeholder="0977********"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              type="tel"
+              placeholder="0977**********"
+              inputMode="numeric"
+              {...form.register("phone")}
             />
+            {form.formState.errors.phone && (
+              <p className="text-xs text-red-500">
+                {form.formState.errors.phone.message}
+              </p>
+            )}
           </div>
 
-          {/* Password */}
-          <div className="space-y-2 pl-2">
+          {/* Password Field */}
+          <div className="space-y-2">
             <div className="flex items-center">
-              <label className="text-sm font-medium">Password</label>
-
+              <label className="text-sm leading-none font-medium">
+                Password
+              </label>
               <Link
                 to="/reset"
-                className="text-muted-foreground ml-auto pr-2 text-xs hover:underline"
+                className="ml-auto text-sm underline-offset-4 hover:underline"
               >
                 Forgot your password?
               </Link>
             </div>
-
-            <PasswordInput
-              className="h-10 text-sm"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <PasswordInput inputMode="numeric" {...form.register("password")} />
+            {form.formState.errors.password && (
+              <p className="text-xs text-red-500">
+                {form.formState.errors.password.message}
+              </p>
+            )}
           </div>
 
-          {/* Error Message */}
           {actionData?.error && (
-            <p className="text-sm text-red-500">{actionData.error}</p>
+            <p className="text-xs text-red-400">{actionData.error}</p>
           )}
 
-          {/* Submit Button */}
-          <Button
-            type="submit"
-            className="h-10 w-full pl-2 text-sm font-medium"
-            disabled={navigation.state === "submitting"}
-          >
-            {navigation.state === "submitting" ? "Submitting..." : "Sign In"}
-          </Button>
-
-          {/* Divider */}
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
-            </div>
-
-            <div className="relative flex justify-center text-[11px] tracking-wider uppercase">
-              <span className="bg-background text-muted-foreground px-2">
+          <div className="grid gap-4">
+            <Button
+              type="submit"
+              className="mt-2 w-full"
+              disabled={navigation.state === "submitting"}
+            >
+              {navigation.state === "submitting" ? "Submitting..." : "Sign In"}
+            </Button>
+            <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
+              <span className="bg-background text-muted-foreground relative z-10 px-2">
                 Or continue with
               </span>
             </div>
+            <Button type="button" variant="outline" className="w-full">
+              Sign In with Google
+            </Button>
           </div>
-
-          {/* Google Button */}
-          <Button
-            type="button"
-            variant="outline"
-            className="h-10 w-full text-sm font-medium"
-          >
-            Continue with Google
-          </Button>
         </form>
 
-        {/* Register Link */}
         <div className="mt-4 text-center text-sm">
-          Don't have an account?{" "}
-          <Link
-            to="/register"
-            className="text-foreground font-semibold underline underline-offset-4"
-          >
+          Don&apos;t have an account?{" "}
+          <Link to="/register" className="underline">
             Sign Up
           </Link>
         </div>

@@ -1,28 +1,21 @@
 import { createBrowserRouter } from "react-router-dom";
-
 import { lazy, Suspense } from "react";
 
 import HomePage from "./pages/Home";
 import AboutPage from "./pages/About";
-
 import RootLayout from "./pages/RootLayout";
-
 import Error from "./pages/Error";
-
 import CartPage from "@/pages/products/Cart";
-
 import ProductPage from "./pages/products/Product";
 import ProductDetailPage from "./pages/products/ProductDetail";
 import ProductRootLayout from "./pages/products/ProductRootLayout";
 import LoginPage from "./pages/auth/Login";
 import RegisterPage from "./pages/auth/Register";
-
+import { homeloader } from "./router/loader";
 
 // LAZY IMPORTS
 const BlogPage = lazy(() => import("@/pages/blogs/Blog"));
-
 const BlogDetailPage = lazy(() => import("@/pages/blogs/BlogDetail"));
-
 const BlogRootLayout = lazy(() => import("@/pages/BlogRootLayout"));
 
 // LOADING UI
@@ -31,94 +24,62 @@ const SuspenseFallback = () => <div className="text-center">Loading....</div>;
 export const router = createBrowserRouter([
   {
     path: "/",
-
     Component: RootLayout,
-
     errorElement: <Error />,
-    
-
     children: [
       {
         index: true,
-
         Component: HomePage,
+        loader: homeloader,
       },
-
       {
         path: "about",
-
         Component: AboutPage,
       },
-
       {
         path: "cart",
-
         Component: CartPage,
       },
-
       {
         path: "blogs",
-
         element: (
           <Suspense fallback={<SuspenseFallback />}>
             <BlogRootLayout />
           </Suspense>
         ),
-
         children: [
           {
             index: true,
-
-            element: (
-              <Suspense fallback={<SuspenseFallback />}>
-                <BlogPage />
-              </Suspense>
-            ),
+            Component: BlogPage,
           },
-
           {
             path: ":postId",
-
-            element: (
-              <Suspense fallback={<SuspenseFallback />}>
-                <BlogDetailPage />
-              </Suspense>
-            ),
+            Component: BlogDetailPage,
           },
         ],
       },
-
       {
         path: "products",
-
         Component: ProductRootLayout,
-
         children: [
           {
             index: true,
-
             Component: ProductPage,
           },
-
           {
             path: ":productId",
-
             Component: ProductDetailPage,
           },
         ],
       },
     ],
   },
-
   {
     path: "/login",
-
-    element: <LoginPage />,
+    Component: LoginPage,
   },
-
   {
     path: "/register",
-
-    element: <RegisterPage />,
+    Component: RegisterPage,
   },
 ]);
