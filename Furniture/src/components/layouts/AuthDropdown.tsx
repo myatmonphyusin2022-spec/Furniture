@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Link } from "react-router-dom";
 import type { User } from "@/types";
 import { Button } from "../ui/button";
@@ -15,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Icons } from "../Icons";
+
 interface UserProps {
   user: User;
 }
@@ -31,6 +30,7 @@ function AuthDropdown({ user }: UserProps) {
     );
   }
   const initialName = `${user.firstName.charAt(0) ?? ""}${user.lastName.charAt(0) ?? ""}`;
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -54,33 +54,32 @@ function AuthDropdown({ user }: UserProps) {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
+          {/* Note: Added 'w-full flex items-center' to the Link so it spreads properly with the shortcut */}
           <DropdownMenuItem asChild>
-            <Link to="#">
+            <Link to="#" className="flex w-full items-center">
               <Icons.dashboard className="mr-2 size-4" aria-hidden="true" />
-              Dashboard
-               <DropdownMenuShortcut>⇧⌘D</DropdownMenuShortcut>
+              <span>Dashboard</span>
+              <DropdownMenuShortcut>⇧⌘D</DropdownMenuShortcut>
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Link to="#">
+
+          {/* Fixed missing asChild on Settings dropdown item */}
+          <DropdownMenuItem asChild>
+            <Link to="#" className="flex w-full items-center">
               <Icons.dashboard className="mr-2 size-4" aria-hidden="true" />
-              Settings
-               <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+              <span>Settings</span>
+              <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
-          <Link to="/login">
+
+        <DropdownMenuItem asChild>
+          <Link to="/login" className="flex w-full items-center">
             <Icons.exit className="mr-2 size-4" aria-hidden="true" />
-            Log out
+            <span>Log out</span>
             <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
           </Link>
-          {/* <Form method="POST" action="/logout">
-            <button type="submit" className="w-full">
-              Logout
-            </button>
-          </Form> */}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
