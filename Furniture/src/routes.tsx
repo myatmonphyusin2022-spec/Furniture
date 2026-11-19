@@ -12,6 +12,7 @@ import ProductRootLayout from "./pages/products/ProductRootLayout";
 import LoginPage from "./pages/auth/Login";
 import RegisterPage from "./pages/auth/Register";
 import { homeloader } from "./router/loader";
+import { loginAction } from "./router/action";
 
 // LAZY IMPORTS
 const BlogPage = lazy(() => import("@/pages/blogs/Blog"));
@@ -77,6 +78,7 @@ export const router = createBrowserRouter([
   {
     path: "/login",
     Component: LoginPage,
+    action: loginAction,
   },
   {
     path: "/register",
