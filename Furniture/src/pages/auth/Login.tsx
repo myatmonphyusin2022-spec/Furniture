@@ -20,11 +20,11 @@ function Login() {
       </div>
 
       {/* Right Side */}
-      <div className="hidden lg:block">
+      <div className="relative hidden lg:block">
         <img
           src={Banner}
           alt="Furniture Shop"
-          className="absolute inset-0 h-full w-full object-cover"
+          className="h-full w-full object-cover"
         />
       </div>
     </div>

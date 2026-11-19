@@ -29,7 +29,10 @@ const FormSchema = z.object({
 
 export default function LoginForm() {
   const submit = useSubmit();
+
   const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
+
   const actionData = useActionData() as { error?: string } | undefined;
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -107,7 +110,7 @@ export default function LoginForm() {
               className="mt-2 w-full"
               disabled={navigation.state === "submitting"}
             >
-              {navigation.state === "submitting" ? "Submitting..." : "Sign In"}
+              {isSubmitting ? "Submitting..." : "Sign In"}
             </Button>
             <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
               <span className="bg-background text-muted-foreground relative z-10 px-2">
